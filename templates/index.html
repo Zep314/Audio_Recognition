@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Главная
+{% endblock %}
+
+{% block content %}
+<h1 class="page_name">
+    Тест распознавания речи
+</h1>
+
+<div class="main_text">
+
+    <form action = "/success" method = "post" enctype="multipart/form-data"> 
+        <input type="file" name="file" accept="audio/*,.mp3" />
+        <input type = "submit" value="Загрузка"> 
+    </form> 
+</div>
+
+<div class="main_text">
+    Сайт лучшего ML - проекта сейчас находится в разработке...
+</div>    
+{% endblock %}

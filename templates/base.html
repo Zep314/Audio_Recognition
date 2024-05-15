@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <title>
+        {% block title %}
+        Мой сайт
+        {% endblock %}
+    </title>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container center">
+                <div class="v_center header1">
+                    ML - проект1
+                </div>
+                <div class="v_center main_menu">
+                    <a href="/" class="menu_item">Главная</a>
+                    <a href="/about/" class="menu_item">О нас</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="container center">
+            {% block content %}
+            Страница не заполнена
+            {% endblock %}
+        </div>
+    </main>
+    <footer>
+        <div class="container center">
+            <div class="v_center    footer1">
+                Все права защищены &copy;
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+О нас
+{% endblock %}
+
+{% block content %}
+<h1 class="page_name">
+    Результат работы:
+</h1>
+<div class="main_text">
+    Распознанный текст:
+</div>
+<div class="main_text" style="border: 1px solid black;">
+    {{recog_text}}
+</div>
+{% endblock %}
