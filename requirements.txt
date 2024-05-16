@@ -1,0 +1,6 @@
+Flask==3.0.3
+torch==2.3.0
+transformers @ git+https://github.com/huggingface/transformers.git@58faa7b82472a712b95453382bff73ee917a06d0
+ffmpeg==1.4
+timeout-decorator==0.5.0
+mutagen==1.47.0
