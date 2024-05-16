@@ -31,7 +31,7 @@
     pip install --upgrade git+https://github.com/huggingface/transformers.git accelerate datasets[audio]
     pip install -r requirements.txt
     puthon ./main.py
-
+ 
 Первый раз запускается довольно долго. Выкачивает из сети ~ 4 Гб файлов.
 
 Если менять модель - то, сответственно, снова будет выкачивать много из сети.
