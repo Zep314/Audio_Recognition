@@ -17,3 +17,21 @@
 
 Страница результата работы
 ![screen2.png](screen2.png)
+
+#### Подготовка виртуалки:
+
+Стандартный Linux Debian 12.1 с обновленными портами
+
+    sudo apt install git python3.11-venv ffmpeg
+    cd /opt
+    git clone https://github.com/Zep314/Audio_Recognition.git
+    cd /opt/Audio_Recognition
+    python3 -m venv .venv
+    source .venv/bin/activate
+    pip install --upgrade git+https://github.com/huggingface/transformers.git accelerate datasets[audio]
+    pip install -r requirements.txt
+    puthon ./main.py
+
+Первый раз запускается довольно долго. Выкачивает из сети ~ 4 Гб файлов.
+
+Если менять модель - то, сответственно, снова будет выкачивать много из сети.
