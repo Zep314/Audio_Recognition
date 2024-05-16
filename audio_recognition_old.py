@@ -3,36 +3,30 @@
 import torch
 from transformers import AutoModelForSpeechSeq2Seq, AutoProcessor, pipeline
 from datasets import load_dataset
+from mutagen.mp3 import MP3
 import time
+import os
 
-start = time.time()
-print('---=== 1 ===---')
+# Подготовка
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
 torch_dtype = torch.float16 if torch.cuda.is_available() else torch.float32
 
-print('---=== 2 ===---')
-
+# Выбор модели
 #model_id = "openai/whisper-large-v3"
-#model_id = "openai/whisper-medium"
+model_id = "openai/whisper-medium"
 #model_id = "openai/whisper-small"
-model_id = "openai/whisper-tiny"
+#model_id = "openai/whisper-tiny"
 
-print('---=== 2.5 ===---')
-
+# Загружаем модель
 model = AutoModelForSpeechSeq2Seq.from_pretrained(
     model_id, torch_dtype=torch_dtype, low_cpu_mem_usage=True, use_safetensors=True
 )
 
-print('---=== 3 ===---')
-
+# Загружаем модель в устройство обработки
 model.to(device)
-
-print('---=== 4 ===---')
-
 processor = AutoProcessor.from_pretrained(model_id)
 
-print('---=== 5 ===---')
-
+# Очередь обработки
 pipe = pipeline(
     "automatic-speech-recognition",
     model=model,
@@ -46,31 +40,16 @@ pipe = pipeline(
     device=device,
 )
 
-print('---=== 6 ===---')
-
+# Выбираем датасет (уже обученный) для работы
 dataset = load_dataset("distil-whisper/librispeech_long", "clean", split="validation")
-
-print('---=== 7 ===---')
-
 sample = dataset[0]["audio"]
 
-finish = time.time()
-res = finish - start
-
-print(f'Время работы: {time.time() - start} секунд')
+# Собственно обработка
 start = time.time()
-
-print('---=== 8 ===---')
-
-#result = pipe("/opt/audio_recognition/upload/zayka.mp3")
-result = pipe("/opt/audio_recognition/upload/zayka.mp3", return_timestamps=True, generate_kwargs={"language": "russian"})
-print(result["text"])
-print(f'Время работы: {time.time() - start} секунд')
-
-#start = time.time()
-
-#print('---=== 9 ===---')
-
-#result = pipe("/opt/audio_recognition/upload/repka.mp3", return_timestamps=True, generate_kwargs={"language": "russian"})
-#print(result["text"])
-#print(f'Время работы: {time.time() - start} секунд')
+filename = "/opt/audio_recognition/upload/zayka.mp3"
+result = pipe(filename, generate_kwargs={"language": "russian"})
+print(f'Размер файла: {os.path.getsize(filename)} байт')
+mp3 = MP3(filename)
+print(f'Длительность записи: {mp3.info.length:.3f} секунд')
+print(f'Время обработки: {time.time() - start:.3f} секунд')
+print(f'Результат: {result["text"]}')

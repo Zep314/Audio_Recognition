@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-О нас
+Результат работы
 {% endblock %}
 
 {% block content %}
@@ -9,9 +9,19 @@
     Результат работы:
 </h1>
 <div class="main_text">
-    Распознанный текст:
+    Размер файла: {{file_size}} байт
+</div>
+<div class="main_text">
+    Длительность записи: {{duration_file}} секунд
+</div>
+<div class="main_text">
+    Время обработки: {{duration_recognition}} секунд
+</div>
+<div class="main_text" style="font-weight: bold;">
+    Результат:
 </div>
 <div class="main_text" style="border: 1px solid black;">
     {{recog_text}}
 </div>
+
 {% endblock %}
